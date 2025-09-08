@@ -1,221 +1,148 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="dark">
-  <title>勇敢牛牛 · AI 在冲</title>
-  <meta name="keywords" content="勇敢牛牛,AI,团队,开源">
-  <meta name="description" content="勇敢牛牛——一支用 AI 改变世界的少年战队">
-  <link rel="icon" href="https://api.iconify.design/mdi:cow.svg" type="image/svg+xml">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <title>勇敢牛牛 · 团队主页</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <style>
-    html,body{font-family:'Inter',sans-serif;}
-    #particles{position:fixed;inset:0;z-index:-1;}
-    .glass{
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15);
+    body {
+      background: radial-gradient(circle at top left, #1e293b, #0f172a);
+      color: white;
+      font-family: 'Microsoft YaHei', sans-serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 to-indigo-900 text-white">
+<body class="min-h-screen p-6 md:p-12">
+  <div class="max-w-6xl mx-auto space-y-12">
+    <!-- 标题 -->
+    <header class="text-center">
+      <h1 class="text-4xl md:text-6xl font-extrabold text-yellow-400 drop-shadow-lg">🐂 勇敢牛牛</h1>
+      <p class="mt-4 text-slate-300">一群热爱 AI 的牛牛</p>
+    </header>
 
-<canvas id="particles"></canvas>
+    <!-- 团队简介 -->
+    <section class="glass rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold mb-4">📖 团队简介</h2>
+      <p class="leading-relaxed text-slate-200">
+        勇敢牛牛由 8 名热爱人工智能与技术创新的同学组成，涵盖算法、工程、前后端、设计等方向。
+        我们的目标是通过协作打造有趣又实用的 AI 应用，把想法变成现实。
+      </p>
+    </section>
 
-<!-- Header -->
-<header class="relative max-w-5xl mx-auto px-6 pt-16 text-center">
-  <img src="https://api.iconify.design/mdi:cow.svg" class="w-20 h-20 mx-auto mb-4 drop-shadow-[0_0_12px_#ffb400]"/>
-  <h1 class="text-5xl md:text-7xl font-black bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text text-transparent">
-    勇敢牛牛
-  </h1>
-  <p class="mt-4 text-lg md:text-xl text-slate-300">让 AI 成为少年勇敢的底气</p>
-</header>
+    <!-- 团队成员 -->
+    <section class="glass rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold mb-6 text-center">👥 团队成员</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- 成员卡片 -->
+        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
+            <span class="text-2xl">🐮</span>
+          </div>
+          <h3 class="mt-3 font-bold">唐名扬</h3>
+          <p class="text-sm text-slate-300">队长 / 全栈 AI</p>
+          <a href="https://github.com/niuniu01" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu01</a>
+          <p class="mt-2 text-xs text-slate-400">"勇敢不是不怕，是带着 bug 上线。"</p>
+        </div>
 
-<!-- Main -->
-<main class="max-w-6xl mx-auto px-6 py-16 grid gap-10">
+        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
+            <span class="text-2xl">🐮</span>
+          </div>
+          <h3 class="mt-3 font-bold">黄孝庆</h3>
+          <p class="text-sm text-slate-300">算法工程师</p>
+          <a href="https://github.com/niuniu02" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu02</a>
+          <p class="mt-2 text-xs text-slate-400">"调参就像养牛，要耐心。"</p>
+        </div>
 
-  <!-- 团队成员 -->
-  <section class="glass rounded-2xl p-6 md:p-8">
-    <h2 class="text-2xl font-bold mb-6 text-center">👥 团队成员</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <!-- 1 -->
-      <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
-        <img src="https://github.com/niuniu01.png" class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400"/>
-        <h3 class="mt-3 font-bold">唐名扬</h3>
-        <p class="text-sm text-slate-300">队长 / 全栈 AI</p>
-        <a href="https://github.com/niuniu01" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu01</a>
-        <p class="mt-2 text-xs text-slate-400">"勇敢不是不怕，是带着 bug 上线。"</p>
+        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
+            <span class="text-2xl">🐮</span>
+          </div>
+          <h3 class="mt-3 font-bold">罗鑫</h3>
+          <p class="text-sm text-slate-300">MLOps</p>
+          <a href="https://github.com/niuniu03" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu03</a>
+          <p class="mt-2 text-xs text-slate-400">"CI/CD 让牛群自动奔跑。"</p>
+        </div>
+
+        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
+            <span class="text-2xl">🐮</span>
+          </div>
+          <h3 class="mt-3 font-bold">杨燚佳</h3>
+          <p class="text-sm text-slate-300">数据引擎</p>
+          <a href="https://github.com/niuniu04" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu04</a>
+          <p class="mt-2 text-xs text-slate-400">"数据清洗=给牛牛洗澡。"</p>
+        </div>
+
+        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
+            <span class="text-2xl">🐮</span>
+          </div>
+          <h3 class="mt-3 font-bold">罗光浩杰</h3>
+          <p class="text-sm text-slate-300">后端架构</p>
+          <a href="https://github.com/niuniu05" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu05</a>
+          <p class="mt-2 text-xs text-slate-400">"高并发就像牛群狂奔，要护栏。"</p>
+        </div>
+
+        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
+            <span class="text-2xl">🐮</span>
+          </div>
+          <h3 class="mt-3 font-bold">危涛</h3>
+          <p class="text-sm text-slate-300">前端&设计</p>
+          <a href="https://github.com/niuniu06" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu06</a>
+          <p class="mt-2 text-xs text-slate-400">「像素不够，勇气来凑。」</p>
+        </div>
+
+        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
+            <span class="text-2xl">🐮</span>
+          </div>
+          <h3 class="mt-3 font-bold">王鑫</h3>
+          <p class="text-sm text-slate-300">边缘 AI</p>
+          <a href="https://github.com/niuniu07" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu07</a>
+          <p class="mt-2 text-xs text-slate-400">「把模型压成牛轧糖。」</p>
+        </div>
+
+        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
+            <span class="text-2xl">🐮</span>
+          </div>
+          <h3 class="mt-3 font-bold">孙嘉应</h3>
+          <p class="text-sm text-slate-300">产品&社区</p>
+          <a href="https://github.com/niuniu08" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu08</a>
+          <p class="mt-2 text-xs text-slate-400">「用户第一，牛牛第二。」</p>
+        </div>
       </div>
-      <!-- 2 -->
-      <div class="group ...">
-        <img src="https://github.com/niuniu02.png" class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400"/>
-        <h3 class="mt-3 font-bold">黄孝庆</h3>
-        <p class="text-sm text-slate-300">算法工程师</p>
-        <a href="https://github.com/niuniu02" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu02</a>
-        <p class="mt-2 text-xs text-slate-400">"调参就像养牛，要耐心。"</p>
-      </div>
-      <!-- 3 -->
-      <div class="group ...">
-        <img src="https://github.com/niuniu03.png" class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400"/>
-        <h3 class="mt-3 font-bold">罗鑫</h3>
-        <p class="text-sm text-slate-300">MLOps</p>
-        <a href="https://github.com/niuniu03" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu03</a>
-        <p class="mt-2 text-xs text-slate-400">"CI/CD 让牛群自动奔跑。"</p>
-      </div>
-      <!-- 4 -->
-      <div class="group ...">
-        <img src="https://github.com/niuniu04.png" class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400"/>
-        <h3 class="mt-3 font-bold">杨燚佳</h3>
-        <p class="text-sm text-slate-300">数据引擎</p>
-        <a href="https://github.com/niuniu04" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu04</a>
-        <p class="mt-2 text-xs text-slate-400">"数据清洗=给牛牛洗澡。"</p>
-      </div>
-      <!-- 5 -->
-      <div class="group ...">
-        <img src="https://github.com/niuniu05.png" class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400"/>
-        <h3 class="mt-3 font-bold">罗光浩杰</h3>
-        <p class="text-sm text-slate-300">后端架构</p>
-        <a href="https://github.com/niuniu05" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu05</a>
-        <p class="mt-2 text-xs text-slate-400">"高并发就像牛群狂奔，要护栏。"</p>
-      </div>
-      <!-- 6 -->
-      <div class="group ...">
-        <img src="https://github.com/niuniu06.png" class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400"/>
-        <h3 class="mt-3 font-bold">危涛</h3>
-        <p class="text-sm text-slate-300">前端&设计</p>
-        <a href="https://github.com/niuniu06" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu06</a>
-        <p class="mt-2 text-xs text-slate-400">「像素不够，勇气来凑。」</p>
-      </div>
-      <!-- 7 -->
-      <div class="group ...">
-        <img src="https://github.com/niuniu07.png" class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400"/>
-        <h3 class="mt-3 font-bold">王鑫</h3>
-        <p class="text-sm text-slate-300">边缘 AI</p>
-        <a href="https://github.com/niuniu07" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu07</a>
-        <p class="mt-2 text-xs text-slate-400">「把模型压成牛轧糖。」</p>
-      </div>
-      <!-- 8 -->
-      <div class="group ...">
-        <img src="https://github.com/niuniu08.png" class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400"/>
-        <h3 class="mt-3 font-bold">孙嘉应</h3>
-        <p class="text-sm text-slate-300">产品&社区</p>
-        <a href="https://github.com/niuniu08" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu08</a>
-        <p class="mt-2 text-xs text-slate-400">「用户第一，牛牛第二。」</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- AI 夸夸机器人 -->
-  <section class="glass rounded-2xl p-6 md:p-8 shadow-xl">
-    <h2 class="text-2xl font-bold mb-4">🤖 AI 夸夸机器人</h2>
-    <p class="text-slate-200 mb-4">点一下按钮，收获一条专属能量语录：</p>
-    <button id="praiseBtn" class="bg-yellow-400 text-slate-900 font-bold px-6 py-3 rounded-full hover:scale-105 transition">
-      给我冲！
-    </button>
-    <p id="praiseText" class="mt-4 text-lg text-yellow-200 min-h-[2rem]"></p>
-  </section>
+    <!-- 夸夸机器人 -->
+    <section class="glass rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold mb-4">🤖 夸夸机器人</h2>
+      <p class="text-slate-300 mb-4">点击按钮，让勇敢牛牛给你一句彩虹屁 ✨</p>
+      <button onclick="kuakua()" class="px-4 py-2 rounded-xl bg-yellow-400 text-black font-bold hover:bg-yellow-300 transition">夸我！</button>
+      <p id="kua-text" class="mt-4 text-lg text-yellow-300 font-semibold"></p>
+    </section>
+  </div>
 
-  <!-- 宣言 -->
-  <section class="glass rounded-2xl p-6 md:p-8">
-    <h2 class="text-2xl font-bold mb-4">🎯 宣言</h2>
-    <ul class="list-disc list-inside space-y-2 text-slate-200">
-      <li>用开源精神，做最勇的 AI 项目；</li>
-      <li>把复杂技术，翻译成小学生也能懂的语言；</li>
-      <li>失败不哞叫，复盘再冲锋。</li>
-    </ul>
-  </section>
-
-  <!-- GitHub -->
-  <section class="glass rounded-2xl p-6 md:p-8">
-    <h2 class="text-2xl font-bold mb-4">🚀 快速开始</h2>
-    <p class="text-slate-200 mb-4">我们的代码全部开源，欢迎 PR & Star：</p>
-    <a href="https://github.com/yourname/brave-calf-ai" target="_blank"
-       class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg">
-      <img src="https://api.iconify.design/mdi:github.svg" class="w-6 h-6"/>
-      <span>GitHub: brave-calf-ai</span>
-    </a>
-  </section>
-</main>
-
-<!-- Footer -->
-<footer class="pb-12 text-center text-slate-400 text-sm">
-  © 2025 勇敢牛牛 Team. MIT License.
-</footer>
-
-<script>
-/* ===== 夸夸机器人 ===== */
-const praises = [
-  "今天也要像牛牛一样，低头冲锋，抬头看光！",
-  "算法不会辜负每一行深夜的 print。",
-  "你跑模型掉的是头发，涨的是 F1。",
-  "bug 只是暂时的，勇士的 commit 消息永远铿锵。",
-  "GPU 风扇在转，你的未来也在转。",
-  "别怕过拟合，勇敢正则化！",
-  "牛气 + 学习率 = 最优解。"
-];
-document.getElementById('praiseBtn').addEventListener('click', () => {
-  document.getElementById('praiseText').textContent =
-    praises[Math.floor(Math.random() * praises.length)];
-});
-
-/* ===== Three.js 粒子牛头 ===== */
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('particles'), alpha: true});
-renderer.setSize(innerWidth, innerHeight);
-camera.position.z = 50;
-
-const vertices = [];
-const loader = new THREE.TextureLoader();
-const dot = loader.load("https://api.iconify.design/mdi:circle.svg");
-
-function line(p0, p1, segments){
-  const v = new THREE.Vector3().subVectors(new THREE.Vector3(...p1), new THREE.Vector3(...p0));
-  const step = v.clone().divideScalar(segments);
-  const pts = [];
-  for(let i=0;i<=segments;i++) pts.push(new THREE.Vector3().addVectors(new THREE.Vector3(...p0), step.clone().multiplyScalar(i)));
-  return pts;
-}
-function ellipse(x0,y0,rx,ry,count){
-  const pts = [];
-  for(let i=0;i<count;i++){
-    const a = (i/count)*Math.PI*2;
-    pts.push(new THREE.Vector3(x0+rx*Math.cos(a), y0+ry*Math.sin(a), 0));
-  }
-  return pts;
-}
-
-const points = [
-  ...line([-20,15,0], [-10,25,0], 10),
-  ...line([20,15,0], [10,25,0], 10),
-  ...ellipse(0,0,25,20,50)
-];
-points.forEach(p=>vertices.push(p.x, p.y, p.z));
-
-const geo = new THREE.BufferGeometry();
-geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-const mat = new THREE.PointsMaterial({
-  map: dot, size: 1.2, color: 0xffb400, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
-});
-const particles = new THREE.Points(geo, mat);
-scene.add(particles);
-
-function animate(){
-  requestAnimationFrame(animate);
-  particles.rotation.y += 0.002;
-  renderer.render(scene, camera);
-}
-animate();
-
-addEventListener('resize', () => {
-  camera.aspect = innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight);
-});
-</script>
+  <script>
+    const kuas = [
+      "你就是 AI 界的天选之子！",
+      "代码在你手里都变得优雅起来了～",
+      "debug？在你眼里只是小菜一碟！",
+      "你写的注释简直比诗还美！",
+      "团队因为有你，直接起飞 🚀"
+    ];
+    function kuakua() {
+      const random = kuas[Math.floor(Math.random() * kuas.length)];
+      document.getElementById('kua-text').textContent = random;
+    }
+  </script>
 </body>
 </html>
