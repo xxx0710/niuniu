@@ -1,137 +1,903 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>勇敢牛牛 · 团队主页</title>
+  <title>勇敢牛牛 - 团队主页</title>
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Inter 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    body {
-      background: radial-gradient(circle at top left, #1e293b, #0f172a);
-      color: white;
-      font-family: 'Microsoft YaHei', sans-serif;
+    /* 自定义 CSS 变量 */
+    :root {
+      --unity-orange: #FF6B00;
+      --unity-gray-dark: #1C1C1C;
+      --unity-gray-medium: #2D2D2D;
+      --unity-gray-light: #3D3D3D;
+      --unity-gray-border: #4D4D4D;
+      --unity-text-primary: #FFFFFF;
+      --unity-text-secondary: #CCCCCC;
+      --unity-text-tertiary: #999999;
     }
-    .glass {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* 基础样式 */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--unity-gray-dark);
+      color: var(--unity-text-primary);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    /* 导航栏 */
+    .unity-header {
+      background-color: var(--unity-gray-dark);
+      border-bottom: 1px solid var(--unity-gray-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .unity-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    .unity-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+    
+    .unity-logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--unity-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    /* 三条杠导航菜单 */
+    .menu-icon {
+      position: relative;
+      margin-right: 1rem;
+    }
+    
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: var(--unity-text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    
+    .menu-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--unity-gray-medium);
+      border: 1px solid var(--unity-gray-border);
+      border-radius: 4px;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    
+    .menu-icon:hover .menu-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .menu-item {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--unity-text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .menu-item:hover {
+      background-color: var(--unity-gray-light);
+      color: var(--unity-orange);
+    }
+    
+    /* Unity 按钮样式 */
+    .unity-btn {
+      background-color: var(--unity-orange);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .unity-btn:hover {
+      background-color: #E55E00;
+      transform: translateY(-1px);
+    }
+    
+    /* Hero 区域 */
+    .hero-section {
+      background: linear-gradient(135deg, var(--unity-gray-dark) 0%, #1A1A1A 100%);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 光斑背景动画 */
+    .hero-section::before,
+    .hero-section::after,
+    .hero-section .light-spot-1,
+    .hero-section .light-spot-2 {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .hero-section::before {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 107, 0, 0.5) 0%, transparent 70%);
+      animation: moveLight1 8s infinite ease-in-out;
+    }
+
+    .hero-section::after {
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(100, 100, 255, 0.3) 0%, transparent 70%);
+      animation: moveLight2 10s infinite ease-in-out;
+    }
+
+    .hero-section .light-spot-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 180, 0, 0.4) 0%, transparent 70%);
+      animation: moveLight3 7s infinite ease-in-out;
+    }
+
+    .hero-section .light-spot-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 100, 150, 0.3) 0%, transparent 70%);
+      animation: moveLight4 12s infinite ease-in-out;
+    }
+
+    @keyframes moveLight1 {
+      0%, 100% { transform: translate(-20%, -20%); }
+      25% { transform: translate(20%, -10%); }
+      50% { transform: translate(10%, 20%); }
+      75% { transform: translate(-10%, 10%); }
+    }
+
+    @keyframes moveLight2 {
+      0%, 100% { transform: translate(20%, 30%); }
+      25% { transform: translate(-10%, 10%); }
+      50% { transform: translate(10%, -20%); }
+      75% { transform: translate(30%, -10%); }
+    }
+
+    @keyframes moveLight3 {
+      0%, 100% { transform: translate(10%, 10%); }
+      25% { transform: translate(-20%, 30%); }
+      50% { transform: translate(30%, 20%); }
+      75% { transform: translate(-10%, -10%); }
+    }
+
+    @keyframes moveLight4 {
+      0%, 100% { transform: translate(-30%, 10%); }
+      25% { transform: translate(10%, -20%); }
+      50% { transform: translate(20%, 20%); }
+      75% { transform: translate(-10%, 30%); }
+    }
+
+    .hero-section > .unity-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--unity-text-secondary);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* 内容区块 */
+    .section {
+      padding: 6rem 0;
+      border-bottom: 1px solid var(--unity-gray-border);
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--unity-text-secondary);
+      margin-bottom: 4rem;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* 特性网格 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .feature-card {
+      background-color: var(--unity-gray-medium);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid transparent;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px) scale(1.05) !important;
+      border-color: var(--unity-orange);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--unity-orange);
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .feature-text {
+      color: var(--unity-text-secondary);
+    }
+    
+    /* Logo 区域 */
+    .logo-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--unity-gray-medium);
+      padding: 3rem;
+      border-radius: 8px;
+    }
+    
+    .logo-container {
+      max-width: 400px;
+      text-align: center;
+    }
+    
+    .logo-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .logo-container img:hover {
+      transform: scale(1.05);
+    }
+    
+    /* 海报区域 */
+    .poster-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--unity-gray-medium);
+      padding: 3rem;
+      border-radius: 8px;
+    }
+    
+    .poster-container {
+      max-width: 800px;
+      text-align: center;
+    }
+    
+    .poster-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .poster-container img:hover {
+      transform: scale(1.02);
+    }
+    
+    /* 团队MV */
+    .mv-section {
+      padding: 2rem 0;
+    }
+    
+    .mv-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      background-color: var(--unity-gray-dark);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+    }
+    
+    .video-wrapper {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .team-video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* 团队成员 */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .team-card {
+      background-color: var(--unity-gray-medium);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid transparent;
+    }
+    
+    .team-card:hover {
+      transform: translateY(-5px) scale(1.08) !important;
+      border-color: var(--unity-orange);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+    
+    .team-avatar {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .team-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .team-role {
+      color: var(--unity-text-secondary);
+    }
+
+
+      overflow: hidden;
+      background-color: var(--unity-gray-dark);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .team-video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .team-github {
+      display: inline-block;
+      color: var(--unity-orange);
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      transition: all 0.2s ease;
+    }
+    
+    .team-github:hover {
+      text-decoration: underline;
+    }
+    
+    .quote {
+      font-style: italic;
+      color: var(--unity-text-tertiary);
+      font-size: 0.875rem;
+    }
+    
+    /* 夸夸机器人 */
+    .robot-section {
+      background-color: var(--unity-gray-medium);
+      border-radius: 8px;
+      padding: 3rem;
+      text-align: center;
+      border: 1px solid var(--unity-gray-border);
+    }
+    
+    .robot-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .robot-description {
+      color: var(--unity-text-secondary);
+      margin-bottom: 2rem;
+    }
+    
+    .robot-response {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background-color: var(--unity-gray-light);
+      border-radius: 4px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--unity-orange);
+      font-weight: 500;
+      border: 1px solid var(--unity-gray-border);
+    }
+    
+    .footer {
+      background-color: var(--unity-gray-medium);
+      padding: 3rem 0;
+      border-top: 1px solid var(--unity-gray-border);
+    }
+    
+    /* 滚动动画样式 */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.4s ease, transform 0.4s ease; /* 速度加快50%，从0.6秒变为0.4秒 */
+    }
+    .animate-on-scroll.active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.4s ease, transform 0.4s ease; /* 速度加快50% */
+    }
+    .animate-on-scroll.exit {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.4s ease, transform 0.4s ease; /* 消失动画，速度加快50% */
+    }
+    /* 从上向下弹出的动画 */
+    .animate-on-scroll.top {
+      transform: translateY(-30px);
+    }
+    .animate-on-scroll.active.top {
+      transform: translateY(0);
+    }
+    .animate-on-scroll.exit.top {
+      transform: translateY(-30px);
+    }
+    .animate-on-scroll.active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.4s ease, transform 0.4s ease; /* 速度加快50% */
+    }
+    .animate-on-scroll.exit {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.4s ease, transform 0.4s ease; /* 消失动画，速度加快50% */
+    }
+    
+    /* 延迟动画 - 用于网格项 */
+    .delay-100 {
+      transition-delay: 0.1s;
+    }
+    .delay-200 {
+      transition-delay: 0.2s;
+    }
+    .delay-300 {
+      transition-delay: 0.3s;
+    }
+    .delay-400 {
+      transition-delay: 0.4s;
+    }
+    .delay-500 {
+      transition-delay: 0.5s;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .feature-grid,
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+    
+    @media (max-width: 1024px) {
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
-<body class="min-h-screen p-6 md:p-12">
-  <div class="max-w-6xl mx-auto space-y-12">
-    <!-- 标题 -->
-    <header class="text-center">
-      <h1 class="text-4xl md:text-6xl font-extrabold text-yellow-400 drop-shadow-lg">🐂 勇敢牛牛</h1>
-      <p class="mt-4 text-slate-300">一群热爱 AI 的牛牛</p>
-    </header>
-
-    <!-- 团队简介 -->
-    <section class="glass rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold mb-4">📖 团队简介</h2>
-      <p class="leading-relaxed text-slate-200">
-        勇敢牛牛由 8 名热爱人工智能与技术创新的同学组成，涵盖算法、工程、前后端、设计等方向。
-        我们的目标是通过协作打造有趣又实用的 AI 应用，把想法变成现实。
-      </p>
-    </section>
-
-    <!-- 团队成员 -->
-    <section class="glass rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold mb-6 text-center">👥 团队成员</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <!-- 成员卡片 -->
-        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
-          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
-            <span class="text-2xl">🐮</span>
-          </div>
-          <h3 class="mt-3 font-bold">唐名扬</h3>
-          <p class="text-sm text-slate-300">队长 / 全栈 AI</p>
-          <a href="https://github.com/niuniu01" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu01</a>
-          <p class="mt-2 text-xs text-slate-400">"勇敢不是不怕，是带着 bug 上线。"</p>
-        </div>
-
-        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
-          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
-            <span class="text-2xl">🐮</span>
-          </div>
-          <h3 class="mt-3 font-bold">黄孝庆</h3>
-          <p class="text-sm text-slate-300">算法工程师</p>
-          <a href="https://github.com/niuniu02" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu02</a>
-          <p class="mt-2 text-xs text-slate-400">"调参就像养牛，要耐心。"</p>
-        </div>
-
-        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
-          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
-            <span class="text-2xl">🐮</span>
-          </div>
-          <h3 class="mt-3 font-bold">罗鑫</h3>
-          <p class="text-sm text-slate-300">MLOps</p>
-          <a href="https://github.com/niuniu03" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu03</a>
-          <p class="mt-2 text-xs text-slate-400">"CI/CD 让牛群自动奔跑。"</p>
-        </div>
-
-        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
-          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
-            <span class="text-2xl">🐮</span>
-          </div>
-          <h3 class="mt-3 font-bold">杨燚佳</h3>
-          <p class="text-sm text-slate-300">数据引擎</p>
-          <a href="https://github.com/niuniu04" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu04</a>
-          <p class="mt-2 text-xs text-slate-400">"数据清洗=给牛牛洗澡。"</p>
-        </div>
-
-        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
-          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
-            <span class="text-2xl">🐮</span>
-          </div>
-          <h3 class="mt-3 font-bold">罗光浩杰</h3>
-          <p class="text-sm text-slate-300">后端架构</p>
-          <a href="https://github.com/niuniu05" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu05</a>
-          <p class="mt-2 text-xs text-slate-400">"高并发就像牛群狂奔，要护栏。"</p>
-        </div>
-
-        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
-          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
-            <span class="text-2xl">🐮</span>
-          </div>
-          <h3 class="mt-3 font-bold">危涛</h3>
-          <p class="text-sm text-slate-300">前端&设计</p>
-          <a href="https://github.com/niuniu06" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu06</a>
-          <p class="mt-2 text-xs text-slate-400">「像素不够，勇气来凑。」</p>
-        </div>
-
-        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
-          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
-            <span class="text-2xl">🐮</span>
-          </div>
-          <h3 class="mt-3 font-bold">王鑫</h3>
-          <p class="text-sm text-slate-300">边缘 AI</p>
-          <a href="https://github.com/niuniu07" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu07</a>
-          <p class="mt-2 text-xs text-slate-400">「把模型压成牛轧糖。」</p>
-        </div>
-
-        <div class="group relative rounded-2xl overflow-hidden bg-slate-800/60 p-4 text-center hover:bg-slate-700/80 transition-all duration-300 hover:shadow-[0_0_20px_#ffb400]">
-          <div class="w-16 h-16 mx-auto rounded-full bg-slate-700 flex items-center justify-center">
-            <span class="text-2xl">🐮</span>
-          </div>
-          <h3 class="mt-3 font-bold">孙嘉应</h3>
-          <p class="text-sm text-slate-300">产品&社区</p>
-          <a href="https://github.com/niuniu08" target="_blank" class="inline-block mt-2 text-yellow-400 hover:underline text-xs">@niuniu08</a>
-          <p class="mt-2 text-xs text-slate-400">「用户第一，牛牛第二。」</p>
+<body>
+  <!-- 导航栏 -->
+  <header class="unity-header">
+    <div class="unity-container unity-nav">
+      <!-- 三条杠导航菜单 -->
+      <div class="menu-icon">
+        <button class="menu-toggle">
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="menu-dropdown">
+          <a href="#hero-section" class="menu-item">首页</a>
+          <a href="#about-us" class="menu-item">关于我们</a>
+          <a href="#team-logo" class="menu-item">团队标识</a>
+          <a href="#team-poster" class="menu-item">团队海报</a>
+          <a href="#team-mv" class="menu-item">团队MV</a>
+          <a href="#team-members" class="menu-item">团队成员</a>
+          <a href="#team-works" class="menu-item">团队作品</a>
+          <a href="#robot-section" class="menu-item">夸夸机器人</a>
         </div>
       </div>
-    </section>
+      
 
-    <!-- 夸夸机器人 -->
-    <section class="glass rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold mb-4">🤖 夸夸机器人</h2>
-      <p class="text-slate-300 mb-4">点击按钮，让勇敢牛牛给你一句彩虹屁 ✨</p>
-      <button onclick="kuakua()" class="px-4 py-2 rounded-xl bg-yellow-400 text-black font-bold hover:bg-yellow-300 transition">夸我！</button>
-      <p id="kua-text" class="mt-4 text-lg text-yellow-300 font-semibold"></p>
-    </section>
-  </div>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section id="hero-section" class="hero-section">
+    <!-- 额外的光斑元素 -->
+    <div class="light-spot-1"></div>
+    <div class="light-spot-2"></div>
+    
+    <div class="unity-container">
+      <div class="hero-content">
+        <h1 class="hero-title">勇敢牛牛<span class="text-[#FF6B00]">不怕困难</span></h1>
+        <p class="hero-subtitle">一群热爱 AI 的牛牛，通过协作打造有趣又实用的 AI 应用，把想法变成现实。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 团队简介 -->
+  <section id="about-us" class="section">
+    <div class="unity-container">
+      <h2 class="section-title animate-on-scroll">关于我们</h2>
+      <p class="section-subtitle animate-on-scroll">勇敢牛牛由 8 名热爱人工智能与技术创新的同学组成，涵盖算法、工程、前后端、设计等方向。我们的目标是通过协作打造有趣又实用的 AI 应用，把想法变成现实。</p>
+      
+      <div class="feature-grid">
+        <div class="feature-card animate-on-scroll delay-100">
+          <div class="feature-icon">
+            <i class="fa fa-lightbulb-o"></i>
+          </div>
+          <h3 class="feature-title">创新思维</h3>
+          <p class="feature-text">我们不断探索 AI 技术的新应用场景，挑战常规思维模式，寻找创新解决方案。</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll delay-200">
+          <div class="feature-icon">
+            <i class="fa fa-code-fork"></i>
+          </div>
+          <h3 class="feature-title">技术驱动</h3>
+          <p class="feature-text">从算法研究到工程实现，我们注重技术细节，追求卓越的技术解决方案。</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll delay-300">
+          <div class="feature-icon">
+            <i class="fa fa-users"></i>
+          </div>
+          <h3 class="feature-title">协作精神</h3>
+          <p class="feature-text">我们相信团队的力量，通过有效的沟通与协作，共同攻克技术难题。</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll delay-400">
+          <div class="feature-icon">
+            <i class="fa fa-rocket"></i>
+          </div>
+          <h3 class="feature-title">快速迭代</h3>
+          <p class="feature-text">我们采用敏捷开发方法，快速迭代产品，不断优化用户体验和功能实现。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 团队Logo -->
+  <section id="team-logo" class="section" style="padding-bottom: 3rem;">
+    <div class="unity-container">
+      <h2 class="section-title animate-on-scroll">团队标识</h2>
+      <p class="section-subtitle animate-on-scroll">我们的 Logo 代表着勇敢、坚韧和创新的团队精神。</p>
+      
+      <div class="logo-section animate-on-scroll">
+        <div class="logo-container">
+          <img src="团队logo.png" alt="勇敢牛牛队Logo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 团队海报 -->
+  <section id="team-poster" class="section" style="padding-top: 3rem;">
+    <div class="unity-container">
+      <h2 class="section-title animate-on-scroll" style="text-align: center;">团队海报</h2>
+      
+      <div class="poster-section animate-on-scroll">
+        <div class="poster-container">
+          <img src="海报.png" alt="勇敢牛牛队海报">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 团队MV -->
+  <section id="team-mv" class="section">
+    <div class="unity-container">
+      <h2 class="section-title animate-on-scroll">团队MV</h2>
+      <p class="section-subtitle animate-on-scroll">观看我们的团队MV，感受勇敢牛牛的精神和活力！</p>
+      
+      <div class="mv-section animate-on-scroll">
+        <div class="mv-container">
+          <!-- 视频播放器容器 -->
+          <div class="video-wrapper">
+            <video id="teamVideo" class="team-video" controls poster="海报.png" preload="auto">
+              <source src="团队MV.mp4" type="video/mp4">
+              您的浏览器不支持HTML5视频播放。
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 团队成员 -->
+  <section id="team-members" class="section">
+    <div class="unity-container">
+      <h2 class="section-title animate-on-scroll">团队成员</h2>
+      <p class="section-subtitle animate-on-scroll">我们的团队由来自不同专业背景的优秀人才组成，每个人都为团队带来独特的技能和视角。</p>
+      
+      <div class="team-grid">
+        <!-- 成员卡片 -->
+        <div class="team-card animate-on-scroll delay-100">
+          <div class="team-avatar">
+            <span>🐮</span>
+          </div>
+          <h3 class="team-name">唐名扬</h3>
+          <p class="team-role">队长 / 全栈 AI</p>
+          <a href="https://github.com/niuniu01" target="_blank" class="team-github">
+            <i class="fa fa-github"></i> @niuniu01
+          </a>
+          <p class="quote">"勇敢不是不怕，是带着 bug 上线。"</p>
+        </div>
+
+        <div class="team-card animate-on-scroll delay-150">
+          <div class="team-avatar">
+            <span>🐮</span>
+          </div>
+          <h3 class="team-name">黄孝庆</h3>
+          <p class="team-role">算法工程师</p>
+          <a href="https://github.com/niuniu02" target="_blank" class="team-github">
+            <i class="fa fa-github"></i> @niuniu02
+          </a>
+          <p class="quote">"调参就像养牛，要耐心。"</p>
+        </div>
+
+        <div class="team-card animate-on-scroll delay-200">
+          <div class="team-avatar">
+            <span>🐮</span>
+          </div>
+          <h3 class="team-name">罗鑫</h3>
+          <p class="team-role">MLOps</p>
+          <a href="https://github.com/niuniu03" target="_blank" class="team-github">
+            <i class="fa fa-github"></i> @niuniu03
+          </a>
+          <p class="quote">"CI/CD 让牛群自动奔跑。"</p>
+        </div>
+
+        <div class="team-card animate-on-scroll delay-250">
+          <div class="team-avatar">
+            <span>🐮</span>
+          </div>
+          <h3 class="team-name">杨燚佳</h3>
+          <p class="team-role">数据引擎</p>
+          <a href="https://github.com/niuniu04" target="_blank" class="team-github">
+            <i class="fa fa-github"></i> @niuniu04
+          </a>
+          <p class="quote">"数据清洗=给牛牛洗澡。"</p>
+        </div>
+
+        <div class="team-card animate-on-scroll delay-300">
+          <div class="team-avatar">
+            <span>🐮</span>
+          </div>
+          <h3 class="team-name">罗光浩杰</h3>
+          <p class="team-role">后端架构</p>
+          <a href="https://github.com/niuniu05" target="_blank" class="team-github">
+            <i class="fa fa-github"></i> @niuniu05
+          </a>
+          <p class="quote">"高并发就像牛群狂奔，要护栏。"</p>
+        </div>
+
+        <div class="team-card animate-on-scroll delay-350">
+          <div class="team-avatar">
+            <span>🐮</span>
+          </div>
+          <h3 class="team-name">危涛</h3>
+          <p class="team-role">前端&设计</p>
+          <a href="https://github.com/niuniu06" target="_blank" class="team-github">
+            <i class="fa fa-github"></i> @niuniu06
+          </a>
+          <p class="quote">「像素不够，勇气来凑。」</p>
+        </div>
+
+        <div class="team-card animate-on-scroll delay-400">
+          <div class="team-avatar">
+            <span>🐮</span>
+          </div>
+          <h3 class="team-name">王鑫</h3>
+          <p class="team-role">边缘 AI</p>
+          <a href="https://github.com/niuniu07" target="_blank" class="team-github">
+            <i class="fa fa-github"></i> @niuniu07
+          </a>
+          <p class="quote">「把模型压成牛轧糖。」</p>
+        </div>
+
+        <div class="team-card animate-on-scroll delay-450">
+          <div class="team-avatar">
+            <span>🐮</span>
+          </div>
+          <h3 class="team-name">孙嘉应</h3>
+          <p class="team-role">产品&社区</p>
+          <a href="https://github.com/niuniu08" target="_blank" class="team-github">
+            <i class="fa fa-github"></i> @niuniu08
+          </a>
+          <p class="quote">「用户第一，牛牛第二。」</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 团队作品 -->
+  <section id="team-works" class="section">
+    <div class="unity-container">
+      <h2 class="section-title animate-on-scroll">团队作品</h2>
+      <p class="section-subtitle animate-on-scroll">探索我们团队开发的创新项目和应用</p>
+      
+      <div class="feature-grid">
+        <!-- 聊天室作品 -->
+        <div class="feature-card animate-on-scroll delay-100">
+          <div class="feature-icon">
+            <i class="fa fa-comments"></i>
+          </div>
+          <h3 class="feature-title">实时聊天室</h3>
+          <p class="feature-text">基于WebSocket的多人实时聊天应用，支持消息推送和用户在线状态显示。</p>
+          <a href="#" class="unity-btn mt-4" onclick="alert('即将跳转到聊天室页面')">
+            <i class="fa fa-external-link"></i> 立即查看
+          </a>
+        </div>
+        
+        <!-- 虚拟空间作品 -->
+        <div class="feature-card animate-on-scroll delay-200">
+          <div class="feature-icon">
+            <i class="fa fa-cube"></i>
+          </div>
+          <h3 class="feature-title">3D虚拟空间</h3>
+          <p class="feature-text">沉浸式3D虚拟环境，支持多人互动和虚拟场景探索，打造身临其境的体验。</p>
+          <a href="#" class="unity-btn mt-4" onclick="alert('即将跳转到虚拟空间页面')">
+            <i class="fa fa-external-link"></i> 立即查看
+          </a>
+        </div>
+        
+        <!-- 图像识别作品 -->
+        <div class="feature-card animate-on-scroll delay-300">
+          <div class="feature-icon">
+            <i class="fa fa-eye"></i>
+          </div>
+          <h3 class="feature-title">图像识别</h3>
+          <p class="feature-text">基于深度学习的图像识别系统，支持多种物体检测、分类和图像分析功能。</p>
+          <a href="ImageRecognition/index.html" class="unity-btn mt-4">
+            <i class="fa fa-external-link"></i> 立即查看
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 夸夸机器人 -->
+  <section id="robot-section" class="section">
+    <div class="unity-container">
+      <div class="robot-section animate-on-scroll">
+        <h2 class="robot-title">🤖 夸夸机器人</h2>
+        <p class="robot-description">点击按钮，让勇敢牛牛给你一句彩虹屁 ✨</p>
+        <button onclick="kuakua()" class="unity-btn">
+          <i class="fa fa-star"></i> 夸我！
+        </button>
+        <div id="kua-text" class="robot-response"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="unity-container">
+      <div class="footer-content">
+        <div class="footer-links animate-on-scroll">
+          <a href="#about-us" class="footer-link">关于我们</a>
+          <a href="#team-members" class="footer-link">项目展示</a>
+          <a href="#" class="footer-link">联系方式</a>
+          <a href="#" class="footer-link">加入我们</a>
+        </div>
+        <div class="footer-social animate-on-scroll">
+          <a href="#" class="footer-social-link"><i class="fa fa-github"></i></a>
+          <a href="#" class="footer-social-link"><i class="fa fa-weixin"></i></a>
+          <a href="#" class="footer-social-link"><i class="fa fa-weibo"></i></a>
+          <a href="#" class="footer-social-link"><i class="fa fa-linkedin"></i></a>
+        </div>
+        <p class="footer-copyright animate-on-scroll">© 2023 勇敢牛牛团队. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
 
   <script>
+    // 夸夸机器人功能
     const kuas = [
       "你就是 AI 界的天选之子！",
       "代码在你手里都变得优雅起来了～",
@@ -143,6 +909,220 @@
       const random = kuas[Math.floor(Math.random() * kuas.length)];
       document.getElementById('kua-text').textContent = random;
     }
+
+    // 平滑滚动功能 - 先快后慢的缓动效果
+    document.addEventListener('DOMContentLoaded', function() {
+      // 为所有导航链接添加点击事件
+      const menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // 获取目标元素的ID
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            // 计算滚动目标位置
+            const targetPosition = targetElement.offsetTop - 80; // 减去导航栏高度
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            const duration = 1000; // 动画持续时间
+            let startTime = null;
+            
+            // 先快后慢的缓动函数
+            function easeInOutQuart(t) {
+              return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+            }
+            
+            // 动画函数
+            function animation(currentTime) {
+              if (startTime === null) startTime = currentTime;
+              const timeElapsed = currentTime - startTime;
+              const run = easeInOutQuart(Math.min(timeElapsed / duration, 1));
+              window.scrollTo(0, startPosition + distance * run);
+              
+              if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+              }
+            }
+            
+            // 开始动画
+            requestAnimationFrame(animation);
+          }
+        });
+      });
+    });
+    
+    // 滚动动画功能
+    document.addEventListener('DOMContentLoaded', function() {
+      // 检测元素是否在视口中
+      function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+        
+        // 元素进入视口25%时触发动画
+        const vertInView = (rect.top <= windowHeight * 0.75) && ((rect.top + rect.height) >= 0);
+        const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) >= 0);
+        
+        return (vertInView && horInView);
+      }
+      
+      // 检测元素是否在视口顶部（用于向上滚动时的特殊动画）
+      function isElementInViewportTop(el) {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        
+        // 元素在视口顶部区域
+        return rect.top < windowHeight * 0.5 && rect.top >= 0 && rect.bottom > 0;
+      }
+      
+      // 检测元素是否离开视口（降低触发门槛）
+      function isElementOutOfViewport(el) {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        
+        // 降低触发门槛，元素底部离开视口顶部20px时就触发消失动画
+        return rect.bottom < -20;
+      }
+      
+      // 检测元素是否在视口上方（用于向上滚动时的动画）
+      function isElementAboveViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.bottom < 0;
+      }
+      
+      // 跟踪上次滚动位置以确定滚动方向
+      let lastScrollTop = 0;
+      
+      // 为所有具有animate-on-scroll类的元素添加动画
+      function handleScrollAnimations() {
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const isScrollingUp = scrollTop < lastScrollTop;
+        lastScrollTop = scrollTop;
+        
+        animatedElements.forEach(element => {
+          const rect = element.getBoundingClientRect();
+          // 检查元素是否在视口上方且向上滚动
+          if (isScrollingUp && isElementAboveViewport(element)) {
+            // 对于视口上方的元素，添加top类使其从上向下弹出
+            element.classList.add('top');
+            // 清除之前可能添加的exit类
+            element.classList.remove('exit');
+            
+            // 当元素进入视口顶部区域时触发动画
+            if (isElementInViewportTop(element)) {
+              if (!element.classList.contains('active')) {
+                setTimeout(() => {
+                  element.classList.add('active');
+                }, 50);
+              }
+            }
+          }
+          // 常规的从下向上出现动画
+          else if (isElementInViewport(element)) {
+            // 确保清除exit类
+            element.classList.remove('exit');
+            // 确保移除top类（除非是向上滚动时的特殊动画）
+            if (!isScrollingUp || !isElementAboveViewport(element)) {
+              element.classList.remove('top');
+            }
+            
+            if (!element.classList.contains('active')) {
+              setTimeout(() => {
+                element.classList.add('active');
+              }, 50);
+            }
+          }
+          // 消失动画 - 无论向上还是向下滚动，只要元素离开视口就触发
+          else {
+            // 如果元素不在视口内且有active类，就移除active类并添加exit类
+            if (element.classList.contains('active')) {
+              element.classList.remove('active');
+              // 根据元素位置决定使用哪种exit动画
+              if (rect.top < 0) {
+                element.classList.add('exit', 'top');
+              } else {
+                element.classList.add('exit');
+              }
+            }
+          }
+        });
+      }
+      
+      // 初始检查
+      handleScrollAnimations();
+      
+      // 监听滚动事件
+      window.addEventListener('scroll', handleScrollAnimations);
+      
+      // 监听窗口大小变化
+      window.addEventListener('resize', handleScrollAnimations);
+    });
   </script>
-</body>
+  
+  <!-- 视频进度控制增强 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.getElementById('teamVideo');
+      
+      // 监听视频元数据加载完成
+      video.addEventListener('loadedmetadata', function() {
+        console.log('视频元数据已加载，可进行快进操作');
+      });
+      
+      // 监听视频可以播放事件
+      video.addEventListener('canplay', function() {
+        console.log('视频可以开始播放');
+      });
+      
+      // 添加错误处理
+      video.addEventListener('error', function(e) {
+        console.error('视频加载错误:', e);
+      });
+      
+      // 确保进度条拖拽事件能够正确触发
+      video.addEventListener('seeking', function() {
+        console.log('正在跳转到指定时间点:', video.currentTime);
+      });
+      
+      video.addEventListener('seeked', function() {
+        console.log('已跳转到指定时间点:', video.currentTime);
+      });
+      
+      // 手动添加进度控制功能
+      const addManualSeekControl = () => {
+        let seeking = false;
+        
+        // 捕获鼠标按下事件
+        video.addEventListener('mousedown', function() {
+          seeking = true;
+        });
+        
+        // 捕获鼠标松开事件
+        video.addEventListener('mouseup', function() {
+          if (seeking) {
+            seeking = false;
+            // 手动设置当前时间，以确保快进生效
+            video.currentTime = video.currentTime;
+          }
+        });
+        
+        // 捕获鼠标离开视频区域事件
+        video.addEventListener('mouseleave', function() {
+          if (seeking) {
+            seeking = false;
+            video.currentTime = video.currentTime;
+          }
+        });
+      };
+      
+      // 应用增强的进度控制
+      addManualSeekControl();
+    });
+  </script>
+
+  </body>
 </html>
